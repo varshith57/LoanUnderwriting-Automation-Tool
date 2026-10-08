@@ -6,8 +6,8 @@ A tool for small-business lending in Nigeria. It reads merchant bank statements 
 extracts every transaction, *proves* the extraction correct against the totals the bank itself
 printed, and turns the verified ledger into an underwriting decision with the evidence attached.
 
-> **[Live demo](#run-the-demo)**: a working version you can try in the browser, with invented
-> sample statements. The demo is a compact rewrite of the core pipeline for this repository
+> **Live demo: [loan-underwriting-demo.streamlit.app](https://loan-underwriting-demo.streamlit.app/)**, a working version you can
+> try in the browser, with invented sample statements and no sign-in. The demo is a compact rewrite of the core pipeline for this repository
 > (read → prove → understand → decide); the original production system and its statement
 > corpus are not published, because the corpus is real borrower data.
 
@@ -170,7 +170,8 @@ from two fictional banks with different layouts:
 | Bello Fabrics · Lagoon Pay | Loan repayments eat over a third of sales | Decline |
 | Okon Phones · Harbor Bank | One credit edited in the PDF, balance left alone | No decision: caught at the exact row |
 
-No sign-in, nothing stored. Run it locally:
+Try it at **https://loan-underwriting-demo.streamlit.app/** (no sign-in, nothing stored; if it has been idle, click
+"wake up" and give it about 30 seconds). Or run it locally:
 
 ```bash
 python -m venv .venv && source .venv/bin/activate
