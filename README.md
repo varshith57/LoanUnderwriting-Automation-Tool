@@ -6,10 +6,10 @@ A tool for small-business lending in Nigeria. It reads merchant bank statements 
 extracts every transaction, *proves* the extraction correct against the totals the bank itself
 printed, and turns the verified ledger into an underwriting decision with the evidence attached.
 
-> This repository is a **project showcase**: architecture, design decisions and results. The
-> production source code and the statement corpus are not published, because the corpus is
-> real borrower data. The [example](examples/reconcile.py) is a small standalone illustration
-> of the core idea, written for this page.
+> **[Live demo](#run-the-demo)**: a working version you can try in the browser, with invented
+> sample statements. The demo is a compact rewrite of the core pipeline for this repository
+> (read → prove → understand → decide); the original production system and its statement
+> corpus are not published, because the corpus is real borrower data.
 
 ---
 
@@ -158,11 +158,40 @@ The short version:
 I designed and built the tool end to end: extraction engine, validation, analysis and decision
 logic, review workflow, UI, test and accuracy harness, CI, and the container and deployment setup.
 
-## Try the core idea
+## Run the demo
+
+The demo app (`app.py` + `underwriter/`) runs the whole pipeline on four invented statements
+from two fictional banks with different layouts:
+
+| Sample | What it shows | Outcome |
+|---|---|---|
+| Adebayo Stores · Harbor Bank | Clean statement, many customers, wrapped narrations | Approve, with a suggested limit |
+| Mama Ngozi Kitchen · Lagoon Pay | 70% of sales from one customer | Refer to an underwriter |
+| Bello Fabrics · Lagoon Pay | Loan repayments eat over a third of sales | Decline |
+| Okon Phones · Harbor Bank | One credit edited in the PDF, balance left alone | No decision: caught at the exact row |
+
+No sign-in, nothing stored. Run it locally:
 
 ```bash
-python examples/reconcile.py
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+streamlit run app.py
 ```
 
-A ~100-line, dependency-free illustration of balance-chain and control-total reconciliation, with a
-deliberately corrupted row to show how a misread is caught.
+Tests (`pip install pytest ruff` first): `pytest` runs 28 tests, including extraction checked
+row by row against the generator, a dropped row, an edited PDF, an unknown layout, and the page
+itself driven headlessly. CI runs them on every push.
+
+```
+app.py                  Streamlit page
+underwriter/
+  extract.py            PDF -> rows, per-bank JSON template over word coordinates
+  validate.py           balance chain + printed totals, exact Decimal arithmetic
+  analysis.py           counterparty grammars, sales vs not-sales, monthly cash flow
+  decision.py           policy rules -> approve / refer / decline, with reasons
+  synthetic.py          invented statements in two layouts (and one tampered)
+  templates/*.json      one file per bank layout
+  grammars.json         ordered counterparty patterns
+  policy.json           thresholds, not code
+examples/reconcile.py   the core idea in ~100 lines, standard library only
+```

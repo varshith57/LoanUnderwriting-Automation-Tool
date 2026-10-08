@@ -1,0 +1,30 @@
+{
+  "id": "lagoon.v1",
+  "bank": "Lagoon Pay",
+  "detect": ["Lagoon Pay", "Account statement"],
+  "summary": {
+    "account_name": {"pattern": "Account holder\\s+(.+)", "type": "text"},
+    "account_number": {"pattern": "Wallet number\\s+(\\d+)", "type": "text"},
+    "period": {"pattern": "Period\\s+(.+)", "type": "text"},
+    "opening": {"pattern": "Balance at start\\s+(-?[\\d,]+\\.\\d{2})", "type": "money"},
+    "total_credits": {"pattern": "Money in\\s+([\\d,]+\\.\\d{2})", "type": "money"},
+    "total_debits": {"pattern": "Money out\\s+([\\d,]+\\.\\d{2})", "type": "money"},
+    "closing": {"pattern": "Balance at end\\s+(-?[\\d,]+\\.\\d{2})", "type": "money"},
+    "count": {"pattern": "Transactions\\s+(\\d+)", "type": "int"}
+  },
+  "table": {
+    "header_marker": "Reference Description",
+    "footer_pattern": "^Lagoon Pay .* page \\d+$",
+    "columns": {
+      "date": [0.0, 0.16],
+      "reference": [0.16, 0.30],
+      "narration": [0.30, 0.66],
+      "amount": [0.66, 0.82],
+      "balance": [0.82, 1.0]
+    },
+    "date_pattern": "^\\d{2}/\\d{2}/\\d{4}$",
+    "date_format": "%d/%m/%Y",
+    "amounts": "signed",
+    "narration_wraps": false
+  }
+}

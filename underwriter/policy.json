@@ -1,0 +1,12 @@
+{
+  "min_full_months": 3,
+  "min_avg_monthly_sales": 300000,
+  "max_top_customer_share": 0.40,
+  "max_loan_burden": 0.30,
+  "max_unidentified_share": 0.15,
+  "max_sales_volatility": 0.50,
+  "max_low_balance_days_share": 0.50,
+  "offer_share_of_monthly_sales": 0.50,
+  "offer_cap": 5000000,
+  "offer_round_to": 10000
+}

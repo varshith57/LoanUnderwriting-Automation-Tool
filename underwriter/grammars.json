@@ -1,0 +1,17 @@
+[
+  {"id": "harbor.reversal", "kind": "reversal", "pattern": "^REVERSAL:?\\s*TRF (?:TO|FROM)\\s+(?P<party>[^/]+)"},
+  {"id": "harbor.pos", "kind": "pos", "pattern": "^POS SETTLEMENT\\b"},
+  {"id": "harbor.loan_in", "kind": "loan_in", "pattern": "^LOAN DISBURSEMENT\\s+(?P<party>[^/]+)"},
+  {"id": "harbor.loan_repayment", "kind": "loan_repayment", "pattern": "^LOAN REPAYMENT\\s+(?P<party>[^/]+)"},
+  {"id": "harbor.transfer_in", "kind": "transfer_in", "pattern": "^TRF FROM\\s+(?P<party>[^/]+)"},
+  {"id": "harbor.transfer_out", "kind": "transfer_out", "pattern": "^TRF TO\\s+(?P<party>[^/]+)"},
+  {"id": "harbor.fee", "kind": "fee", "pattern": "^(NIP TRANSFER FEE|VAT ON|SMS ALERT|STAMP DUTY|ACCOUNT MAINTENANCE)"},
+
+  {"id": "lagoon.reversal", "kind": "reversal", "pattern": "^Reversal of transfer to\\s+(?P<party>.+)$"},
+  {"id": "lagoon.pos", "kind": "pos", "pattern": "^Card settlement\\b"},
+  {"id": "lagoon.loan_in", "kind": "loan_in", "pattern": "^Loan disbursed - (?P<party>.+)$"},
+  {"id": "lagoon.loan_repayment", "kind": "loan_repayment", "pattern": "^Loan repayment - (?P<party>.+)$"},
+  {"id": "lagoon.transfer_in", "kind": "transfer_in", "pattern": "^Inward transfer from\\s+(?P<party>.+)$"},
+  {"id": "lagoon.transfer_out", "kind": "transfer_out", "pattern": "^Transfer to\\s+(?P<party>.+)$"},
+  {"id": "lagoon.fee", "kind": "fee", "pattern": "^(Transfer charge|Stamp duty)"}
+]
